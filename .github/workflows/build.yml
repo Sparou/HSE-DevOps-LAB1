@@ -87,7 +87,7 @@ jobs:
             document: simple_calculator
 
 
-    build:
+    windows_tg:
         runs-on: windows-latest
 
         steps:
