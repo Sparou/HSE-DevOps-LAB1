@@ -74,11 +74,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Build Project
+        run: |
+        g++ -o myapp main.cpp
+
       - name: Build and Deploy Container
         uses: docker://ubuntu
         with:
           args: >
             run -d -p 8080:80
-            -v $PWD:/app 
+            -v $PWD:/app
             --name my-container
+            ./myapp
 
