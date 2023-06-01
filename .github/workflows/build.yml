@@ -20,7 +20,7 @@ jobs:
         run: |
           g++ -o myapp main.cpp
         
-      -name: Create artifacts directory
+      - name: Create artifacts directory
         run: |
           mkdir -p ./artifacts
 
