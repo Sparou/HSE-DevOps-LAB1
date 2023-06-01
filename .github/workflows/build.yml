@@ -20,6 +20,10 @@ jobs:
         run: |
           g++ -o myapp main.cpp
 
+      - name: Install ghr
+        run: |
+          sudo apt-get -y install golang-github-tcnksm-ghr
+
       - name: Upload Artifacts
         uses: fnkr/github-action-ghr@v1.3
         if: startsWith(github.ref, 'refs/tags/')
