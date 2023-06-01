@@ -20,7 +20,11 @@ jobs:
         run: |
           g++ -o myapp main.cpp
 
+      - run: mkdir -p path/to/artifacts
+
+
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: myapp
+          path: path/to/artifact/myapp
