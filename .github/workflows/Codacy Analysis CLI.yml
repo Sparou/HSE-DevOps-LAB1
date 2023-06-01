@@ -1,0 +1,20 @@
+name: Codacy Analysis CLI
+
+# Указываем, когда будет запускаться workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs: analyse code
+  build:
+    # Указываем систему, на который будем билдить проект
+    runs-on: ubuntu-latest
+
+    # Клонируем репозиторий
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
