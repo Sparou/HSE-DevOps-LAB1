@@ -27,8 +27,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: simple_calculator.zi
-          path: simple_calculator.zi
+          name: simple_calculator.zip
+          path: simple_calculator.zip
   
   analyse_code:
     # Указываем систему, на который будем билдить проект
@@ -102,7 +102,7 @@ jobs:
 
       - name: Archive C++ Application
         run: |
-          7z a myapp.zip myapp.exe
+          7z a simple_calculator.zip simple_calculator.exe
 
       - name: Send Application to Telegram
         uses: appleboy/telegram-action@master
