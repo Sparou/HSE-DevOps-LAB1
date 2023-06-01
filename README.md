@@ -281,7 +281,7 @@ Codecy URL: https://github.com/marketplace/actions/codacy-analysis-cli
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-calculator:latest
 
 ```
 ### Dockerfile
