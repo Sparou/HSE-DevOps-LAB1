@@ -41,7 +41,7 @@ jobs:
 
       - name: Print directory
         run: ls -la
-        
+
       - name: Send File to Telegram
         run: |
-          curl -F document=@${{ github.workspace }}/artifacts/myapp.zip "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}"
+          curl -F document=@${{ github.workspace }}/myapp.zip "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}"
