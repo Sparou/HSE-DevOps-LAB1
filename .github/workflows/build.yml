@@ -39,5 +39,5 @@ jobs:
         run: sudo apt-get install -y curl
 
       - name: Send File to Telegram
-        run: |
-          curl -F document=@main.cpp "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}"
+  run: |
+    curl -F document=@${{ github.workspace }}/myapp.zip "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}"
