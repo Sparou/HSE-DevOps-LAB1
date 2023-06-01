@@ -1,0 +1,26 @@
+name: Build
+
+# Указываем, когда будет запускаться workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    # Указываем систему, на который будем билдить проект
+    runs-on: windows-latest
+
+    # Клонируем репозиторий
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+  
+      # Подготовляем среду для сборки на C++
+      - name: Set up C++ environment
+        uses: actions/setup-cxx@v2
+
+      - name: Build Project
+        run: |
+          cl /EHsc /Fe:myapp.exe main.cpp
+
