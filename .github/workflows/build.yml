@@ -34,10 +34,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: myapp.zip
+          path: artifacts
 
       - name: Install curl
         run: sudo apt-get install -y curl
 
       - name: Send File to Telegram
         run: |
-          curl -F document=@myapp.zip "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}"
+          curl -F document=@${{ github.workspace }}/artifacts/myapp.zip "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}"
