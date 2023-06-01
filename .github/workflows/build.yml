@@ -123,6 +123,7 @@ jobs:
     needs: build_on_linux
     runs-on: ubuntu-latest
 
+    steps:
       - uses: actions/download-artifact@v3
         with:
           name: calculator.exe
@@ -130,7 +131,7 @@ jobs:
       - name: Run tests
         run: |
           ./calculator < tests/input.txt > output.txt
-          
+
       - name: Check test results
         run: |
           diff output.txt tests/expected_output.txt
