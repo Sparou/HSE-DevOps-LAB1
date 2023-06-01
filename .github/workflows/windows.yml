@@ -14,6 +14,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Install Visual Studio Build Tools
+        uses: microsoft/setup-msbuild@v1.1
+
       - name: Build C++ code
         run: |
           msbuild /t:Build /p:Configuration=Release /p:Platform=x64 /property:OutputFile=calculator.exe main.cpp
