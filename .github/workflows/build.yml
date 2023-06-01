@@ -46,5 +46,4 @@ jobs:
 
       - name: Send File to Telegram
         run: |
-          curl -F document=@"$PWD/myapp.zip" https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}
-          
+          curl -F document=@"$PWD/myapp.zip" https://api.telegram.org/bot6125773535:AAGJ66ZlFDDGBG-qXPajSDSIc1m23ILe0M0/sendDocument?chat_id=https://t.me/semenov_nikita_s
