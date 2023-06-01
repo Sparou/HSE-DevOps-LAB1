@@ -30,6 +30,11 @@ jobs:
           name: myapp.zip
           path: myapp.zip
 
+      - name: Download Artifact
+      - uses: actions/download-artifact@v3
+        with:
+          name: myapp.zip
+
       - name: Install curl
         run: sudo apt-get install -y curl
 
