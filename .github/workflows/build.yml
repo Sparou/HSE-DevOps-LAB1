@@ -20,9 +20,6 @@ jobs:
         run: |
           g++ -o myapp main.cpp
 
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
-
       - name: Archive Artifact
         run: |
           zip -r myapp.zip myapp
@@ -32,12 +29,28 @@ jobs:
         with:
           name: myapp.zip
           path: myapp.zip
+  
+  analyse_code:
+    # Указываем систему, на который будем билдить проект
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: myapp.zip
-          path: artifacts
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
+
+
+  send_to_telegram:
+    runs-on: ubuntu-latest
+      steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Project
+        run: |
+          g++ -o myapp main.cpp
 
       - name: Install curl
         run: sudo apt-get install -y curl
@@ -49,5 +62,4 @@ jobs:
 
       - name: Send File to Telegram
         run: |
-          curl -F document=@"$PWD/myapp.zip" https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}
-          
+          curl -F document=@"$PWD/myapp" https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}
