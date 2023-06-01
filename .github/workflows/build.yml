@@ -18,17 +18,17 @@ jobs:
   
       - name: Build Project
         run: |
-          g++ -o myapp main.cpp
+          g++ -o simple_calculator main.cpp
 
       - name: Archive Artifact
         run: |
-          zip -r myapp.zip myapp
+          zip -r simple_calculator.zip simple_calculator
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: myapp.zip
-          path: myapp.zip
+          name: simple_calculator.zi
+          path: simple_calculator.zi
   
   analyse_code:
     # Указываем систему, на который будем билдить проект
@@ -76,7 +76,7 @@ jobs:
 
       - name: Build Project
         run: |
-          g++ -o myapp main.cpp
+          g++ -o simple_calculator main.cpp
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
@@ -84,4 +84,30 @@ jobs:
             to: ${{ secrets.TELEGRAM_CHAT_ID }}
             token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
             message: Uploaded artifacts
-            document: myapp
+            document: simple_calculator
+
+
+    build:
+        runs-on: windows-latest
+
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v2
+
+          - name: Install g++
+            run: choco install mingw -y
+
+          - name: Build C++ Application
+            run: g++ main.cpp -o simple_calculator.exe
+
+          - name: Archive C++ Application
+            run: |
+              7z a myapp.zip myapp.exe
+
+          - name: Send Application to Telegram
+            uses: appleboy/telegram-action@master
+            with:
+                to: ${{ secrets.TELEGRAM_CHAT_ID }}
+                token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+                message: Uploaded artifacts
+                document: simple_calculator.exe
