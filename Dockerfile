@@ -11,7 +11,7 @@ WORKDIR /app
 COPY main.cpp .
 
 # Компилируем приложение
-RUN g++ -o simple_calculator main.cpp
+RUN g++ -o calculator main.cpp
 
 # Определяем команду, которая будет выполняться при запуске контейнера
-CMD [ "./myapp" ]
+CMD [ "./calculator" ]
