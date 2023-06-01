@@ -22,8 +22,8 @@ jobs:
 
       - name: Archive Artifacts
         run: |
-          zip -r artifacts.zip myapp
-          mv artifacts.zip $GITHUB_WORKSPACE
+          zip -r "artifacts-$(date +"%Y%m%d-%H%M%S").zip" myapp
+          mv "artifacts-$(date +"%Y%m%d-%H%M%S").zip" $GITHUB_WORKSPACE
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
