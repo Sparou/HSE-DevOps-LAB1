@@ -20,6 +20,9 @@ jobs:
         run: |
           g++ -o myapp main.cpp
 
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
+
       - name: Archive Artifact
         run: |
           zip -r myapp.zip myapp
