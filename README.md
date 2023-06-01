@@ -30,6 +30,7 @@
   - [Выгрузка артефактов во внешнюю систему](#выгрузка-артефактов-во-внешнюю-систему)
   - [Дополнительные шаги: статический анализ кода](#дополнительные-шаги-статический-анализ-кода)
   - [Контейнеризация](#контейнеризация)
+  - [Тестирование](#тестирование)
 
 <hr>
 
@@ -263,4 +264,33 @@ Codecy URL: https://github.com/marketplace/actions/codacy-analysis-cli
 
 <hr>
 
+## Тестирование
 
+Автоматическое тестирование также присутствует в проекте и ввиду простоты проекта реализовано методом банального сравнения **output.txt** и **expected_output.txt**. Также, как и в случае отправки артефактов в телеграм на этот **job** установлена зависимость, которая позволяет ему выполниться только после выгрузки свежего артефакта.
+
+```yml
+  tests:
+    needs: build_on_linux
+    runs-on: ubuntu-latest
+    
+
+    steps:
+      
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: calculator
+
+      - name: Change file permissions
+        run: chmod +x calculator
+
+      - name: Run tests
+        run: |
+          ./calculator < tests/input.txt > output.txt
+
+      - name: Check test results
+        run: |
+          diff output.txt tests/expected_output.txt
+```
