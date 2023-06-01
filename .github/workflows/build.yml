@@ -90,11 +90,19 @@ jobs:
   telgram:
     runs-on: ubuntu-latest
     
-    steps:
-    - name: Send Telegram message
-      uses: appleboy/telegram-action@master
-      with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          message: Uploaded artifacts
-          document: myapp
+    steps:    
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Project
+        run: |
+          g++ -o myapp main.cpp
+
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+            to: ${{ secrets.TELEGRAM_CHAT_ID }}
+            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+            message: Uploaded artifacts
+            document: myapp
