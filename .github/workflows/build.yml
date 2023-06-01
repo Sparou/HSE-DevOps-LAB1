@@ -74,28 +74,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build Project
-        run: |
-          g++ -o simple_calculator main.cpp
-
-      - name: Send Telegram message
-        uses: appleboy/telegram-action@master
-        with:
-            to: ${{ secrets.TELEGRAM_CHAT_ID }}
-            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-            message: Uploaded artifacts
-            document: simple_calculator
-
-
-  windows_tg:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Install g++
-        run: choco install mingw -y
+        run: sudo apt-get install g++
 
       - name: Build C++ Application
         run: g++ main.cpp -o simple_calculator.exe
@@ -104,10 +84,10 @@ jobs:
         run: |
           7z a simple_calculator.zip simple_calculator.exe
 
-      - name: Send Application to Telegram
+      - name: Send Telegram message
         uses: appleboy/telegram-action@master
         with:
             to: ${{ secrets.TELEGRAM_CHAT_ID }}
             token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
             message: Uploaded artifacts
-            document: simple_calculator.exe
+            document: simple_calculator.zip
