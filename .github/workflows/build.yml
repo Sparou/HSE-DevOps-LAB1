@@ -22,13 +22,13 @@ jobs:
 
       - name: Archive Artifact
         run: |
-          zip -r simple_calculator.zip simple_calculator
+          7z a simple_calculator.7z simple_calculator
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: simple_calculator.zip
-          path: simple_calculator.zip
+          name: simple_calculator.7z
+          path: simple_calculator.7z
   
   analyse_code:
     # Указываем систему, на который будем билдить проект
@@ -74,20 +74,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install g++
-        run: sudo apt-get install g++
-
-      - name: Build C++ Application
-        run: g++ main.cpp -o simple_calculator.exe
+      # Компилируем под Linux
+      - name: Build Project
+        run: |
+          g++ -o simple_calculator main.cpp
 
       - name: Archive C++ Application
         run: |
-          7z a simple_calculator.zip simple_calculator.exe
+          7z a simple_calculator.7z simple_calculator
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
         with:
             to: ${{ secrets.TELEGRAM_CHAT_ID }}
             token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-            message: Uploaded artifacts
-            document: simple_calculator.zip
+            message: Windows & Linux versions
+            document: simple_calculator.7z
+
+
+    

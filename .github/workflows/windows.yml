@@ -1,0 +1,60 @@
+name: Build
+
+# Указываем, когда будет запускаться workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Visual Studio Build Tools
+        uses: microsoft/setup-msbuild@v1.0.0
+
+      - name: Build C++ code
+        run: |
+          msbuild /t:Build /p:Configuration=Release /p:Platform=x64 /property:OutputFile=calculator.exe main.cpp
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: calculator.exe
+          path: bin/Release/calculator.exe
+
+          
+  send_to_telgram:
+    runs-on: ubuntu-latest
+    
+    steps:    
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: calculator.exe
+
+      - name: Print directory
+        run: |
+          ls -la
+
+      - name: Archive C++ Application
+        run: |
+          7z a calculator.7z calculator.exe
+
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+            to: ${{ secrets.TELEGRAM_CHAT_ID }}
+            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+            message: Windows & Linux versions
+            document: calculator.7z
+
+
+    
