@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build:
+  build_on_linux:
     # Указываем систему, на который будем билдить проект
     runs-on: ubuntu-latest
 
@@ -15,23 +15,46 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-  
+
+    # Компилируем main.cpp под Linux
       - name: Build Project
         run: |
           g++ -o simple_calculator main.cpp
 
-      - name: Archive Artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: simple_calculator
+          path: simple_calculator
+  
+  
+  build_on_windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Устанавливаем Clang как компилятор для Windows
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
+
+      # Билдим проект под Windows
+      - name: Build with Clang
         run: |
-          7z a simple_calculator.7z simple_calculator
+          clang++ main.cpp -o calculator.exe
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: simple_calculator.7z
-          path: simple_calculator.7z
-  
+          name: calculator.exe
+          path: calculator.exe
+
+  # Анализ кода с помощью Codacy
   analyse_code:
-    # Указываем систему, на который будем билдить проект
     runs-on: ubuntu-latest
     
     steps:
@@ -41,6 +64,8 @@ jobs:
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
 
+
+  # Контейнеризация приложения
   docker_application:
     runs-on: ubuntu-latest
     steps:
@@ -65,8 +90,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 
-          
   send_to_telgram:
+    needs: build_on_windows
     runs-on: ubuntu-latest
     
     steps:    
@@ -74,22 +99,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Компилируем под Linux
-      - name: Build Project
-        run: |
-          g++ -o simple_calculator main.cpp
+      - uses: actions/download-artifact@v3
+        with:
+          name: calculator.exe
 
       - name: Archive C++ Application
         run: |
-          7z a simple_calculator.7z simple_calculator
+          7z a calculator.7z calculator.exe
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
         with:
             to: ${{ secrets.TELEGRAM_CHAT_ID }}
             token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-            message: Windows & Linux versions
-            document: simple_calculator.7z
-
+            message: Windows Application
+            document: calculator.7z    
 
     
