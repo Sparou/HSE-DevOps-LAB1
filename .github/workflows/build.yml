@@ -87,27 +87,27 @@ jobs:
             document: simple_calculator
 
 
-    windows_tg:
-        runs-on: windows-latest
+  windows_tg:
+    runs-on: windows-latest
 
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-          - name: Install g++
-            run: choco install mingw -y
+      - name: Install g++
+        run: choco install mingw -y
 
-          - name: Build C++ Application
-            run: g++ main.cpp -o simple_calculator.exe
+      - name: Build C++ Application
+        run: g++ main.cpp -o simple_calculator.exe
 
-          - name: Archive C++ Application
-            run: |
-              7z a myapp.zip myapp.exe
+      - name: Archive C++ Application
+        run: |
+          7z a myapp.zip myapp.exe
 
-          - name: Send Application to Telegram
-            uses: appleboy/telegram-action@master
-            with:
-                to: ${{ secrets.TELEGRAM_CHAT_ID }}
-                token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-                message: Uploaded artifacts
-                document: simple_calculator.exe
+      - name: Send Application to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+            to: ${{ secrets.TELEGRAM_CHAT_ID }}
+            token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+            message: Uploaded artifacts
+            document: simple_calculator.exe
