@@ -19,17 +19,13 @@ jobs:
       - name: Build Project
         run: |
           g++ -o myapp main.cpp
-        
-      - name: Create artifacts directory
-        run: |
-          mkdir -p ./artifacts
 
       - name: Archive Artifact
         run: |
-          zip -r .artifacts/myapp.zip myapp
+          zip -r myapp.zip myapp
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: myapp.zip
-          path: .artifacts/myapp.zip
+          path: myapp.zip
