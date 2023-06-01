@@ -22,7 +22,7 @@ jobs:
 
       - name: Upload Artifacts
         uses: fnkr/github-action-ghr@v1.3
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           GHR_PATH: artifacts/
           GHR_REPLACE: true
           GHR_COMPRESS: zip
