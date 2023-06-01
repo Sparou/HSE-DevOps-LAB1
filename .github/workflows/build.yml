@@ -22,7 +22,7 @@ jobs:
         
       -name: Create artifacts directory
         run: |
-          mkdir -p ,./artifacts
+          mkdir -p ./artifacts
 
       - name: Archive Artifact
         run: |
