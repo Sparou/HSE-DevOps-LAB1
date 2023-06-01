@@ -14,12 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Visual Studio Build Tools
-        uses: microsoft/setup-msbuild@v1.1
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
 
-      - name: Build C++ code
+      - name: Build with Clang
         run: |
-          msbuild /property:OutputFile=calculator.exe main.cpp
+          clang++ main.cpp -o calculator.exe
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
