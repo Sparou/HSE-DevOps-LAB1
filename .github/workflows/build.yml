@@ -40,7 +40,9 @@ jobs:
         run: sudo apt-get install -y curl
 
       - name: Print directory
-        run: ls -la
+        run: |
+          pwd
+          ls -la
 
       - name: Send File to Telegram
         run: |
