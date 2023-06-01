@@ -20,12 +20,8 @@ jobs:
         run: |
           g++ -o myapp main.cpp
 
-      - name: Archive Artifact
-        run: |
-          zip -r myapp.zip myapp
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: myapp.zip
+          name: myapp
           path: ./artifacts
