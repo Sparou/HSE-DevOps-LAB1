@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -65,3 +65,20 @@ jobs:
       - name: Send File to Telegram
         run: |
           curl -F document=@"$PWD/myapp" https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}
+
+  docker_application:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build and Deploy Container
+        uses: docker://ubuntu
+        with:
+          args: >
+            run -d -p 8080:80
+            -v $PWD:/app 
+            --name my-container
+
