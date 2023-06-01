@@ -21,23 +21,23 @@ int main() {
       switch(op) {
 
         case '+':
-          std::cout << num1 << " + " << num2 << " = " << num1 + num2 << endl;
+          std::cout << num1 << " + " << num2 << " = " << num1 + num2 << std::endl;
           break;
 
         case '-':
-          std::cout << num1 << " - " << num2 << " = " << num1 - num2 << endl;
+          std::cout << num1 << " - " << num2 << " = " << num1 - num2 << std::endl;
           break;
 
         case '*':
-          std::cout << num1 << " * " << num2 << " = " << num1 * num2 << endl;
+          std::cout << num1 << " * " << num2 << " = " << num1 * num2 << std::endl;
           break;
 
         case '/':
-          std::cout << num1 << " / " << num2 << " = " << num1 / num2 << endl;
+          std::cout << num1 << " / " << num2 << " = " << num1 / num2 << std::endl;
           break;
 
         default:
-          std::cout << "Error! operator is not correct" << endl;
+          std::cout << "Error! operator is not correct" << std::endl;
           break;
       }
     }
