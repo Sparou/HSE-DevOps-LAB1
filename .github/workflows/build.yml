@@ -76,7 +76,7 @@ jobs:
 
       - name: Build Project
         run: |
-        g++ -o myapp main.cpp
+          g++ -o myapp main.cpp
 
       - name: Build and Deploy Container
         uses: docker://ubuntu
