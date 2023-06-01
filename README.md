@@ -29,6 +29,7 @@
   - [Выгрузка артефактов](#выгрузка-артефактов)
   - [Выгрузка артефактов во внешнюю систему](#выгрузка-артефактов-во-внешнюю-систему)
   - [Дополнительные шаги: статический анализ кода](#дополнительные-шаги-статический-анализ-кода)
+  - [Дополнительные шаги: Проверка форматирования](#дополнительные-шаги-проверка-форматирования)
   - [Контейнеризация](#контейнеризация)
     - [Job](#job)
     - [Dockerfile](#dockerfile)
@@ -231,6 +232,25 @@ Codecy URL: https://github.com/marketplace/actions/codacy-analysis-cli
         uses: codacy/codacy-analysis-cli-action@master
 ```
 
+<hr>
+
+## Дополнительные шаги: Проверка форматирования
+
+**Formatting Check** ищет в репозитории **.clang-format** и, если находит, проверяет существующий код на корректность форматирования согласно стилю, заданному в **.clang-format**.
+
+```yml
+  # Проверка корректности форматирования
+  formatting-check:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run clang-format style check for C/C++/Protobuf programs.
+        uses: jidicula/clang-format-action@v4.11.0
+        with:
+          clang-format-version: '13'
+          check-path: 'src'
+```
 <hr>
 
 ## Контейнеризация
