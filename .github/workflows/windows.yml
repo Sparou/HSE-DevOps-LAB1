@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build:
+  build_on_windows:
     runs-on: windows-latest
 
     steps:
@@ -28,10 +28,12 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: calculator.exe
-          path: bin/Release/calculator.exe
+          path: calculator.exe
 
           
   send_to_telgram:
+
+    needs: build_on_windows
     runs-on: ubuntu-latest
     
     steps:    
