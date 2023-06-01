@@ -2,7 +2,7 @@
 
 int main() {
 
-  while true {
+  while (true) {
       char op;
       float num1, num2;
 
