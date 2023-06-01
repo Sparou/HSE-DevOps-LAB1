@@ -22,7 +22,7 @@ jobs:
 
       - name: Install ghr
         run: |
-          sudo apt-get -y install golang-github-tcnksm-ghr
+          $ go install github.com/tcnksm/ghr@latest
 
       - name: Upload Artifacts
         uses: fnkr/github-action-ghr@v1.3
