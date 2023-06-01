@@ -133,6 +133,9 @@ jobs:
         with:
           name: calculator
 
+      - name: Change file permissions
+        run: chmod +x calculator
+
       - name: Run tests
         run: |
           ./calculator < tests/input.txt > output.txt
