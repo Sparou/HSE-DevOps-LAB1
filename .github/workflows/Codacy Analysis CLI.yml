@@ -6,8 +6,8 @@ on:
     branches:
       - main
 
-jobs: analyse code
-  build:
+jobs: 
+  analyse_code:
     # Указываем систему, на который будем билдить проект
     runs-on: ubuntu-latest
 
