@@ -14,17 +14,18 @@ jobs:
     # Клонируем репозиторий
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
   
       - name: Build Project
         run: |
           g++ -o myapp main.cpp
 
-      - run: mkdir -p path/to/artifacts
-
+      - name: Archive Artifact
+        run: |
+          zip -r myapp.zip myapp
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: myapp
-          path: path/to/artifact/myapp
+          name: myapp.zip
+          path: ./artifacts/myapp.zip
