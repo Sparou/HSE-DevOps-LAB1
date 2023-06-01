@@ -22,7 +22,7 @@ jobs:
     # Компилируем main.cpp под Linux
       - name: Build Project
         run: |
-          g++ -o simple_calculator main.cpp
+          g++ -o calculator main.cpp
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
