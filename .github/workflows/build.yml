@@ -11,6 +11,7 @@ on:
 
 jobs:
   build_on_linux:
+    name: Build Project on Linux
     # Указываем систему, на который будем билдить проект
     runs-on: ubuntu-latest
 
@@ -32,6 +33,7 @@ jobs:
   
   
   build_on_windows:
+    name: Build Project on Windows
     runs-on: windows-latest
 
     steps:
@@ -58,6 +60,7 @@ jobs:
 
   # Анализ кода с помощью Codacy
   analyse_code:
+    name: Analyse Project code with Codecy
     runs-on: ubuntu-latest
     
     steps:
@@ -81,6 +84,7 @@ jobs:
 
   # Контейнеризация приложения
   docker_application:
+    name: Application Containerization
     runs-on: ubuntu-latest
     steps:
       -
@@ -105,6 +109,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-calculator:latest
 
   send_to_telgram:
+    name: Send Artifacts to Telegram
     needs: build_on_windows
     runs-on: ubuntu-latest
     
@@ -131,6 +136,7 @@ jobs:
 
 
   tests:
+    name: Application Testing
     needs: build_on_linux
     runs-on: ubuntu-latest
     
