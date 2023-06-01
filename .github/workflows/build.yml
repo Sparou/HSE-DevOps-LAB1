@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build_on_linux:
@@ -114,5 +117,22 @@ jobs:
             token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
             message: Windows Application
             document: calculator.7z    
+
+
+  tests:
+    needs: build_on_linux
+    runs-on: ubuntu-latest
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: calculator.exe
+
+      - name: Run tests
+        run: |
+          ./calculator < tests/input.txt > output.txt
+          
+      - name: Check test results
+        run: |
+          diff output.txt tests/expected_output.txt
 
     

@@ -1,38 +1,46 @@
-# include <iostream>
+#include <iostream>
 
 int main() {
 
-  char op;
-  float num1, num2;
+  while true {
+      char op;
+      float num1, num2;
 
-  std::cout << "Enter operator: +, -, *, /: ";
-  std::cin >> op;
+      std::cout << "Enter operator: +, -, *, /: | or q if you want to exit";
+      std::cin >> op;
 
-  std::cout << "Enter two operands: ";
-  std::cin >> num1 >> num2;
+      if (op == 'q')
+      {
+        return 0;
+      }
 
-  switch(op) {
+      std::cout << "Enter two operands: ";
+      std::cin >> num1 >> num2;
+      
 
-    case '+':
-      std::cout << num1 << " + " << num2 << " = " << num1 + num2;
-      break;
+      switch(op) {
 
-    case '-':
-      std::cout << num1 << " - " << num2 << " = " << num1 - num2;
-      break;
+        case '+':
+          std::cout << num1 << " + " << num2 << " = " << num1 + num2 << endl;
+          break;
 
-    case '*':
-      std::cout << num1 << " * " << num2 << " = " << num1 * num2;
-      break;
+        case '-':
+          std::cout << num1 << " - " << num2 << " = " << num1 - num2 << endl;
+          break;
 
-    case '/':
-      std::cout << num1 << " / " << num2 << " = " << num1 / num2;
-      break;
+        case '*':
+          std::cout << num1 << " * " << num2 << " = " << num1 * num2 << endl;
+          break;
 
-    default:
-      std::cout << "Error! operator is not correct";
-      break;
-  }
+        case '/':
+          std::cout << num1 << " / " << num2 << " = " << num1 / num2 << endl;
+          break;
+
+        default:
+          std::cout << "Error! operator is not correct" << endl;
+          break;
+      }
+    }
 
   return 0;
 }
