@@ -165,7 +165,7 @@ jobs:
   # Контейнеризация приложения
   deploy_to_local_machine:
     name: Deploy to local machine
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: docker_application
     steps:
 
