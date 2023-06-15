@@ -167,8 +167,10 @@ jobs:
     name: Deploy to local machine
     runs-on: self-hosted
     needs: docker_application
+
+
     steps:
 
       - name: Deploy to local machine
         run: |
-          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-calculator:latest
+          docker run -d -p 8080:80 -it ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-calculator:latest
