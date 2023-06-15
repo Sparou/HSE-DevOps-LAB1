@@ -19,7 +19,7 @@ int main()
 
         std::cin >> num1 >> num2;
 
-        std::cout << "Your expression is: " << num1 << " " << op << << " " << num2 << std::endl;
+        std::cout << "Your expression is: " << num1 << " " << op << " " << num2 << std::endl;
 
         switch (op)
         {
