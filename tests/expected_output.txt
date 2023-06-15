@@ -1,4 +1,9 @@
+Calculator is running
+Your expression is: 1 + 1
 2
+Your expression is: 1 - 1
 0
+Your expression is: 2 * 2
 4
+Your expression is: 27 / 3
 9

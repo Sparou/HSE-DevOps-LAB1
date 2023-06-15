@@ -3,6 +3,8 @@
 int main()
 {
 
+    std::cout << "Calculator is running" << std::endl;
+
     while (true)
     {
         char op;
@@ -16,6 +18,8 @@ int main()
         }
 
         std::cin >> num1 >> num2;
+
+        std::cout << "Your expressin is: " << num1 << " " << op << num2 << std::endl;
 
         switch (op)
         {
