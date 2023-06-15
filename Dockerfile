@@ -4,4 +4,5 @@ RUN g++ -static -o a.out main.cpp
 
 FROM alpine 
 COPY --from=build a.out a.out
-CMD ["./a.out", "q"]
+COPY tests/input.txt input.txt
+CMD ["./a.out", "<", "input.txt"]
