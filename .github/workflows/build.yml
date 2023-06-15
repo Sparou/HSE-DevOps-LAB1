@@ -174,4 +174,4 @@ jobs:
 
       - name: Run docker container on local machine
         run: |
-          docker run ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest input.txt
+          docker run ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest input.txt'
