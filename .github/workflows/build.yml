@@ -173,4 +173,4 @@ jobs:
 
       - name: Deploy to local machine
         run: |
-          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
+          docker run -it ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest

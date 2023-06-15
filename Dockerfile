@@ -1,11 +1,7 @@
-# Используем образ Ubuntu c GCC
-FROM gcc:latest
-
-# Копируем исходный код вашего приложения внутрь контейнера
+FROM gcc:latest as build
 COPY . .
+RUN g++ -static -o a.out main.cpp
 
-# Компилируем приложениеa
-RUN g++ -o calculator main.cpp
-
-# Определяем команду, которая будет выполняться при запуске контейнера
-CMD [ "./calculator" ]
+FROM alpine 
+COPY --from=build a.out a.out
+CMD ["./a.out", "q"]
