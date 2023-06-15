@@ -107,7 +107,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-calculator:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
 
   send_to_telgram:
     name: Send Artifacts to Telegram
@@ -173,4 +173,4 @@ jobs:
 
       - name: Deploy to local machine
         run: |
-          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/ubuntu-calculator:latest
+          docker run -d -p 8080:80 ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
