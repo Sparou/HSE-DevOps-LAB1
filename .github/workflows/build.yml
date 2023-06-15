@@ -162,15 +162,16 @@ jobs:
         run: |
           diff output.txt tests/expected_output.txt
 
-  # Контейнеризация приложения
   deploy_to_local_machine:
     name: Deploy to local machine
     runs-on: self-hosted
     needs: docker_application
 
-
     steps:
-
-      - name: Deploy to local machine
+      - name: Pull docker image to local machine
         run: |
-          docker run --tty ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
+
+      - name: Run docker container on local machine
+        run: |
+          docker run ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
