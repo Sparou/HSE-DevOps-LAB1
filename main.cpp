@@ -3,8 +3,6 @@
 int main()
 {
 
-    std::cout << "Calculator is activated!\n";
-    
     while (true)
     {
         char op;
