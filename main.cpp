@@ -5,9 +5,10 @@ int main()
 
     std::cout << "Calculator is running" << std::endl;
 
-    while (true)
+    char op = '+';
+
+    while (op != 'q')
     {
-        char op;
         float num1, num2;
 
         std::cin >> op;
