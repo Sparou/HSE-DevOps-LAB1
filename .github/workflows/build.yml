@@ -173,4 +173,4 @@ jobs:
 
       - name: Deploy to local machine
         run: |
-          docker run -it hsedevopslab1:latest
+          docker run -t ${{ secrets.DOCKERHUB_USERNAME }}/calculator:latest
