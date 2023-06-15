@@ -1,11 +1,5 @@
-# Используем образ Ubuntu
-FROM ubuntu:latest
-
-# Обновляем необходимые пакеты для сборки и выполнения C++ приложения
-RUN apt-get update && apt-get install -y g++
-
-# Устанавливаем рабочую директорию внутри контейнера
-WORKDIR /app
+# Используем образ Ubuntu c GCC
+FROM gcc:latest
 
 # Копируем исходный код вашего приложения внутрь контейнера
 COPY main.cpp .
