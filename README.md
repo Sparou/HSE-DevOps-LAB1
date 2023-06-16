@@ -132,6 +132,7 @@ on:
   build_on_linux:
     # Указываем систему, на который будем билдить проект
     runs-on: ubuntu-latest
+    needs: [formatting-check, analyse_code]
 
     # Клонируем репозиторий
     steps:
@@ -152,6 +153,7 @@ on:
 ```yml
  build_on_windows:
     runs-on: windows-latest
+    needs: [formatting-check, analyse_code]
 
     steps:
       - name: Checkout repository
