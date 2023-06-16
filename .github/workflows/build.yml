@@ -12,6 +12,7 @@ jobs:
   build_on_linux:
     name: Build Project on Linux
     runs-on: ubuntu-latest
+    needs: [formatting-check, analyse_code]
 
     steps:
       - name: Checkout repository
@@ -31,6 +32,7 @@ jobs:
   build_on_windows:
     name: Build Project on Windows
     runs-on: windows-latest
+    needs: [formatting-check, analyse_code]
 
     steps:
       - name: Checkout repository
